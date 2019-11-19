@@ -19,11 +19,7 @@ pool:
         version: '2.2.x'
         packageType: runtime
      
-- task: UseDotNet@2
-  displayName: 'Install .NET Core SDK'
-  inputs:
-    version: 3.0.x
-    performMultiLevelLookup: true  
+   
     
     
 - task: DotNetCoreCLI@2
