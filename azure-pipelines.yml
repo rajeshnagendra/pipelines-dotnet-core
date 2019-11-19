@@ -18,8 +18,7 @@ pool:
       inputs:
         version: '2.2.x'
         packageType: runtime
-        
- steps:
+     
 - task: UseDotNet@2
   displayName: 'Install .NET Core SDK'
   inputs:
@@ -27,7 +26,6 @@ pool:
     performMultiLevelLookup: true  
     
     
-    steps:
 - task: DotNetCoreCLI@2
   displayName: Build
   inputs:
@@ -36,7 +34,6 @@ pool:
     arguments: '--configuration Release' # Update this to match your need
     
     
-    steps:
 - task: DotNetCoreCLI@2
   displayName: 'Install dotnetsay'
   inputs:
@@ -44,7 +41,6 @@ pool:
     custom: tool
     arguments: 'install -g dotnetsay'
     
-    steps:
 # ...
 # do this after other tasks such as building
 - task: DotNetCoreCLI@2
@@ -53,7 +49,6 @@ pool:
     projects: '**/*Tests/*.csproj'
     arguments: '--configuration $(buildConfiguration)'
     
-    steps:
 # ...
 # do this after your tests have run
 - script: dotnet test <test-project> --logger trx
@@ -63,7 +58,6 @@ pool:
     testRunner: VSTest
     testResultsFiles: '**/*.trx'
     
-    steps:
 # ...
 # do this after other tasks such as building
 - task: DotNetCoreCLI@2
@@ -72,7 +66,6 @@ pool:
     projects: '**/*Tests/*.csproj'
     arguments: '--configuration $(buildConfiguration) --collect "Code coverage"'
     
-    steps:
 # ...
 # do this after your tests have run
 - script: dotnet test <test-project> --logger trx --collect "Code coverage"
@@ -81,7 +74,6 @@ pool:
     testRunner: VSTest
     testResultsFiles: '**/*.trx'
     
-    steps:
 
 - task: DotNetCoreCLI@2
   inputs:
@@ -96,7 +88,6 @@ pool:
     pathtoPublish: '$(Build.ArtifactStagingDirectory)' 
     artifactName: 'myWebsiteName'
 
-steps:
 # ...
 # do this after you've built your app, near the end of your pipeline in most cases
 # for example, you do this before you deploy to an Azure web app on Windows
